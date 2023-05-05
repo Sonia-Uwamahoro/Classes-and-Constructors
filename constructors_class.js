@@ -1,9 +1,14 @@
 
+// Question 1
 
-// You are working on a web application for a car rental company. They want to keep track
-// of their car inventory and rental information. Your task is to create a JavaScript class or
-// function constructor for representing cars in their inventory and another one for
-// representing rental information.
+// 1) Create a Car class or function constructor that has the following properties:
+// a. make (string): The make of the car, e.g., "Toyota".
+// b. model (string): The model of the car, e.g., "Camry".
+// c. year (number): The year the car was manufactured, e.g., 2020.
+// d. isAvailable (boolean): Indicates if the car is currently available for rent.
+// The Car class or function constructor should also have a method called
+// toggleAvailability that changes the isAvailable property to its opposite value (true to
+// false, false to true)
 
 
 class Car{
@@ -41,18 +46,30 @@ class Rental extends Car{
         this.rentalStartDate = rentalStartDate
         this.rentalEndDate = rentalEndDate
     }
-    calculateRentalDuration(){
-    }
+        calculateRentalDuration(){
+        const duration = 86400000;
+        const rentalDuration = this.rentalEndDate - this.rentalStartDate;
+        return Math.round(rentalDuration / duration);
 
+    }
 }
 
-let rental = new Rental(car,'James', new Date('2023-05-01'), new Date('2023-05-05'))
+let rental = new Rental(car,'James', new Date('2024-01-02'), new Date('2029-09-09'))
+const rentalDurationInDays = rental.calculateRentalDuration();
+console.log(rentalDurationInDays);
 
 
-// You are building a simple quiz app that contains multiple-choice questions. Your task is
-// to create two JavaScript classes: Question and Quiz. The Question class will represent
-// individual questions, and the Quiz class will manage a collection of questions and the
-// user's progress.
+
+// Question 2
+
+// Create a Question class with the following properties:
+// ● text(string): The text of the question.
+// ● options(array): An array containing the multiple-choice options.
+// ● correctAnswer(string): The correct answer to the question.
+// The Question class should also have a method called checkAnswer that takes a
+// user's answer as a parameter and returns true if the answer is correct and false
+// otherwise.
+
 
 class Question{
     constructor(text,option,correctAnswer){
@@ -77,74 +94,33 @@ question.checkAnswer()
 // ● score(number): The user’s current score.
 // The Quiz class should have the following methods:
 
-class Quiz {
-    constructor() {
-      this.questions = [];
-      this.currentQuestionIndex = 0;
-      this.score = 0;
-    }
-  
+
+
+class Quiz{
+  constructor(questions, currentQuestionIndex, score){
+    this.questions = questions;
+    this.currentQuestionIndex = currentQuestionIndex;
+    this.score = score
+  }
+
     addQuestion(question) {
       this.questions.push(question);
+      console.log(question);
     }
-  
+
     nextQuestion() {
-      this.currentQuestionIndex++;
+      this.currentQuestionIndex ++;
     }
-  
+      
     submitAnswer(userAnswer) {
       const currentQuestion = this.questions[this.currentQuestionIndex];
       if (currentQuestion.checkAnswer(userAnswer)) {
         this.score++;
       }
     }
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   lass Rental{
-//     constructor(car,renterDate,rentalStartDate,rentalEndDate){
-//         this.car=car;
-//         this.renterDate=renterDate;
-//         this.rentalStartDate=rentalStartDate;
-//         this.rentalEndDate=rentalEndDate;
-//     }
-//     calculateRentalDuration(){
-//         const ONE_DAY_IN_MILLISECONDS = 86400000;
-//         const rentalDurationInMilliseconds = this.rentalEndDate - this.rentalStartDate;
-//         return Math.round(rentalDurationInMilliseconds / ONE_DAY_IN_MILLISECONDS);
-
-//     }
-// }
-// const rental = new Rental(car, 'John Doe', new Date('2023-05-01'), new Date('2023-05-05'));
-// const rentalDurationInDays = rental.calculateRentalDuration();
-// console.log(rentalDurationInDays);
-
-
-
-
-
-
- 
+}
+let quiz = new Quiz([11,22,33,44,55], 1, 100);
+quiz.addQuestion(90)
+quiz.nextQuestion();
+// quiz.submitAnswer();
+console.log({quiz});
